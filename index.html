@@ -2,35 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Memory Matching Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Match Game</title>
   <link rel="stylesheet" href="styles/game.css" />
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <!-- SweetAlert2 Library -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-  <header>
-    <h1>Memory Matching Game</h1>
-    <p>Match all the pairs to win</p>
-  </header>
-  <main>
-    <div class="game-info">
-      <div>Moves <span id="moves">0</span></div>
-      <div>Matches <span id="matches">0</span></div>
-      <div>Time <span id="time">00:00</span></div>
-    </div>
-    <div class="game-memory" id="game-board"></div>
-    <div class="controls">
-      <button id="new-game">New Game</button>
-      <button id="hint">Show Hints</button>
-    </div>
-    <div class="overlay" id="overlay"></div>
-    <div class="message" id="win-message">
-      <h2>Congratulations, You won!</h2>
-      <p>You matched all pairs in <span id="final-time">00:00</span> with <span id="final-moves">0</span> moves!</p>
-      <button id="play-again">Play Again</button>
-      <button id="cancel">Cancel</button>
-    </div>
-  </main>
+  <h1>Memory Match Game</h1>
+
+  <!-- Info bar -->
+  <div class="game-info">
+    <span id="moves">Moves: 0</span>
+    <span id="timer">Time: 0s</span>
+  </div>
+
+  <!-- Game board -->
+  <div id="game-board" class="game-board"></div>
+
+  <!-- Message area -->
+  <div id="message" class="message"></div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button id="play-again">Play Again</button>
+    <button id="cancel-game">Cancel</button>
+  </div>
+
   <script src="scripts/game.js"></script>
 </body>
 </html>
