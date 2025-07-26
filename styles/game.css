@@ -1,0 +1,234 @@
+:root {
+    --card-width: 100px;             /* Define the Width of each card*/
+    --card-height: 150px;            /* Define the Height of each card*/
+    --card-border-radius: 10px;      /* Define the Border Radius of each card*/
+    --primary-color: #FFFFFF;      /* Define the Primary Color of the game */
+    --secondary-color: #0000FF;    /* Define the Secondary Color of the game */
+    --accent-color: #FF0000;       /* Define the Accent Color of the game */
+    --background-color: #e2e2ec;   /* Define the Background Color of the game */
+    --card-back: #ff0000;          /* Define the Color of the back of the card*/
+    --card-front: #ffffff;        /* Define the Color of the front of the card*/
+}
+
+* {
+    box-sizing: border-box;    /* Ensure padding and border are included in the element's total width and height */
+    margin: 0;             /* Remove default margin */
+    padding: 0;         /* Remove default padding */
+}
+
+body {
+    font-family: 'sans-serif', Arial, sans-serif; /* Set the font family for the body */
+    background-color: var(--background-color); /* Set the background color of the body */
+    display: flex;    /* Use flexbox for layout */
+    flex-direction: column;  /* Arrange children in a column */
+    align-items: center;    /* Center children horizontally */
+    padding: 2px;      /* Add padding around the body */
+}
+
+header {
+    text-align: center;   /* Center the text in the header */
+    margin-bottom: 0.5rem; /* Add margin below the header */
+    color: var(--secondary-color); /* Set the text color of the header */
+}
+
+h1 {
+    font-size: 2.5rem; /* Set the font size for the main title */
+    margin-bottom: 0.5rem; /* Add margin below the title */
+    color: var(--secondary-color); /* Set the color of the title */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the title */
+}
+
+.game-info {
+    display: flex;     /* Use flexbox for layout */
+    justify-content: space-between;   /* Space out the children evenly */
+    width: 100%;    /* Set the width to 100% of the parent */
+    max-width: 600px; /* Set a maximum width for the game info section */
+    margin-bottom: 1rem; /* Add margin below the game info section */
+    font-size: 1.2rem; /* Set the font size for the game info */
+    color: var(--secondary-color); /* Set the text color for the game info */
+   
+}
+#matches, #moves, #time {
+    margin-right: 10px;
+}
+.game-memory {
+    display: grid; /* use grid layout for the game memory area */
+    grid-template-columns: repeat(4, 1fr); /* Create 4 equal columns */
+    gap: 15px; /* Add space between the cards */
+    max-width: 600px; /* Set a maximum width for the game memory area */
+    margin: 0 auto; /* Center the game memory area */
+    justify-content: center;
+}
+
+.card {
+    width: var(--card-width);  /* Set the width of the card */
+    height: var(--card-height);  /* Set the height of the card */
+    perspective: 1000px; /* Set perspective for 3D effect */
+    position: relative; /* Set position to relative for child elements */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: transform 0.6s; /* Add transition for smooth flipping effect */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Add a hover effect to lift the card slightly */
+}
+
+.card-inner {
+    position: relative; /* Set position to relative for child elements */
+    width: 100%; /* Set width to 100% of the parent */
+    height: 100%; /* Set height to 100% of the parent */
+    text-align: center; /* Center text inside the card */
+    transition: transform 0.6s; /* Add transition for smooth flipping effect */
+    transform-style: preserve-3d; /* Preserve 3D effect for child elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow to the card */
+    border-radius: 10px; /* Add border radius to the card */
+    transform: rotateY(0deg);
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;   /* Set position to absolute for child elements */
+    width: 100px; /* Set width to 100% of the parent */
+    height: 100px; /* Set height to 100% of the parent */
+    -webkit-backface-visibility: hidden; /* Hide the back face of the card */
+    backface-visibility: hidden; /* Hide the back face of the card */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    border-radius: 10px; /* Add border to the card */
+    font-size: 2.5rem; /* Set font size for the card content */
+    font-weight: bold; /* Set font weight for the card content */
+}
+
+
+.card-front {
+    background-color: var(--card-front);  /* Set the background color of the front of the card */
+    color: var(--secondary-color); /* Set the text color of the front of the card */
+    transform:  rotateY(180deg); /* Rotate the front of the card to hide it initially */
+}
+
+.card-back {
+    background-color: var(--card-back);  /* Set the background color of the back of the card */
+    background-image: linear-gradient(135deg, var(--card-back) 25%, var(--secondary-color) 25%, var(--secondary-color) 50%, var(--card-back) 50%, var(--card-back) 75%, var(--secondary-color) 75%, var(--secondary-color) 100%); /* Add a striped background to the back of the card */
+    background-size: 20px 20px; /* Set the size of the stripes */
+    color: var(--primary-color); /* Set the text color of the back of the card */
+}
+
+
+.card.matched .card-front {
+    background-color: var(--secondary-color); /* Change the background color of the front of the card when matched */
+    color: var(--primary-color); /* Change the text color of the front of the card when matched */
+    animation: pulse 1s; /* Add a pulse animation when matched */
+}
+
+
+@keyframes pulse {
+    0% { transform: rotateY('180deg') scale(1);} /* Start at original scale */
+    50% { transform: rotateY('180deg') scale(1.1);} /* Scale up to 110% */
+    100% { transform: rotateY('180deg') scale(1);} /* Return to original scale */
+}
+
+
+.controls {
+    margin-top: 2rem; /* Add margin above the controls */
+    display: flex; /* Use flexbox for layout */
+    gap: 1rem; /* Add space between the buttons */
+}
+
+
+button {
+    padding: 0.8rem 1.5rem; /* Add padding to the buttons */
+    font-size: 1rem; /* Set font size for the buttons */
+    background-color: var(--secondary-color); /* Set background color for the buttons */
+    color: var(--primary-color); /* Set text color for the buttons */
+    border: none; /* Remove border from the buttons */
+    border-radius: 5px; /* Add border radius to the buttons */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Add transition for background color and transform */
+}
+
+
+button:hover {
+    background-color: var(--accent-color); /* Change background color on hover */
+}
+
+
+.message {
+    position: fixed; /* Set position to fixed for the message */
+    top: 50%; /* Center the message vertically */
+    left: 50%; /* Center the message horizontally */
+    transform: translate(-50%, -50%); /* Adjust position to center */
+    padding: 2rem; /* Add padding to the message */
+    border-radius: 10px; /* Add border radius to the message */
+    border: var(--primary-color);
+    background-color: var(--background-color);
+    box-shadow: 0 5px 15px rgba (0, 0, 0, 0.3); /* Add shadow to the message */
+    text-align: center; /* Center text inside the message */
+    z-index: 100; /* Ensure the message is above other elements */
+    display: none; /* Hide the message by default */
+}
+
+.message h2 {
+    color: var(--secondary-color); /* Set the color of the message title */
+    margin-bottom: 1rem; /* Add margin below the title */
+}
+
+.message p {
+    margin-bottom: 1.5rem; /* Add margin below the message text */
+    font-size: 1.3rem; /* Set font size for the message text */
+}
+
+
+.overlay {
+    position: fixed;  /* Set position to fixed for the overlay */
+    top: 0; /* Position at the top of the viewport */
+    left: 0; /* Position at the left of the viewport */
+    width: 100%; /* Set width to 100% of the viewport */
+    height: 100%; /* Set height to 100% of the viewport */
+    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background color */
+    z-index: 90; /* Ensure the overlay is above other elements */
+    display: none; /* Hide the overlay by default */
+}
+
+
+
+/* ---------- MEDIA QUERIES FOR RESPONSIVENESS ---------- */
+
+/* For tablets and small laptops (screen width 768px or less) */
+@media (max-width: 768px) {
+  :root {
+    --card-width: 23vw;      /* Set card width to 23% of viewport width for better fit on smaller screens */
+    --card-height: 30vw;     /* Set card height to 30% of viewport width to maintain aspect ratio */
+  }
+
+  .game-info {
+    font-size: 1rem;         /* Reduce font size of game info text for better readability on smaller screens */
+  }
+
+  .card-front, .card-back {
+    font-size: 1.5rem;       /* Slightly reduce the font size on cards to fit better on screen */
+  }
+}
+
+/* For mobile devices (screen width 480px or less) */
+@media (max-width: 480px) {
+  :root {
+    --card-width: 28vw;      /* Increase card width to 28% of viewport width for better tap targets on mobile */
+    --card-height: 35vw;     /* Increase card height proportionally for consistency */
+  }
+
+  h1 {
+    font-size: 1.8rem;       /* Reduce the heading size for mobile to avoid overflow */
+  }
+
+  .card-front, .card-back {
+    font-size: 1.3rem;       /* Further reduce font size on cards for smaller screens */
+  }
+
+  .message {
+    width: 90%;              /* Allow message box to take up more screen width on mobile for better visibility */
+  }
+}
