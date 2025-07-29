@@ -43,7 +43,7 @@ function startTimer() {
   }, 1000);
 }
 
-// Setup game logic
+// Setup game logic —flipping cards and checking for matches
 function setupGame() {
   try {
     clearGameBoard(gameBoard);
